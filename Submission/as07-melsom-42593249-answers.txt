@@ -1,0 +1,48 @@
+// phys3071 as07 melsom 42593249
+
+Problem 1:
+M = E - e*sin(E)
+dM/dE = 1 - e*cos(E)
+
+For 0<e<1, dM/dE is always positive, therefore M is strictly increasing.
+This means that there is at most a single solution for 0 = E - e*sin(E) - M
+For M = 0 for any value of E, sin(E) is always bounded between e and -e (where
+e < 1) if e very close to zero, the line is almost straight between E and M, 
+and for e close to 1, the line gets a larger wiggle on it, but still remains 
+strictly increasing. For M = 4pi, the function is still close to a straight 
+line for small e, and wiggly, but strictly increasing still.
+
+Just outside of our bounds, setting e to 0 would result in a linear plot
+between E and M, setting e to 1 would result in the root between E = 0 and 4pi, 
+so picking bounds for our root for 0 <= E <= 4pi.
+
+
+Problem 4:
+Whilst building my Newton-Raphson method, Initially I started with setting my 
+initial guess (x_old) as 0, starting with M= 0, the first guess was always the
+root, so I quickly changed it to pi. This was just so I could possibly see
+convergence or see the program get to 30 iterations without convergence.
+
+Once I tried to make x_old a function of M, I started with x_old= M. This was 
+just initial so I could see the effects of M varying with every iteration. The 
+outputted data table was very difficult to understand what was occurring as M, 
+and hence x_old changing actually effected. Plotting these results were much
+help either as too often the program exited to to 30 iterations.
+
+I attempted linearising the equation and using a linear function of M as my
+initial guess. This was achieved by taking a Taylor expansion of the Kepler 
+equation and discarding all above linear terms. This didn't seem to work for 
+me and neither did taking more terms of the expansion.
+
+I moved to the wikipedia page about Newtons method, and more importantly when 
+does it not converge. I was able to rule out some of the reasons because our
+function was strictly increasing. But I was unable to find a good initial guess
+as a function of M.
+
+I began researching by finding papers that were discussing our exact problem - 
+solving roots using Newton-Raphson method on Kepler's equation. A lot of the 
+papers discussed problems with finding good initial guesses, especially for
+eccentricities above 0.9. Eventually I settled on the function of
+x_old= M+ epsi* sin(M) where I take x_old= M and take a small perturbation from
+that line which is dependant on both epsilon and M. This still does not work 
+for all cases.
